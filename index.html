@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>效能与品质保障事业部｜2026战略路径&amp;战役规划</title>
+  <style>
+    :root{
+      --bg:#0b1220; --card:#101a2e; --muted:#9fb0d0; --text:#e9f0ff;
+      --line:#1f2b45; --ok:#46d39a; --warn:#ffd166; --bad:#ff5c7a;
+      --tag:#182544; --primary:#4080ff; --primary-light:#5a91ff;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#070b14);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+      line-height: 1.6;
+    }
+    .wrap{
+      max-width: 1400px;
+      margin:0 auto;
+      padding:28px 18px 40px;
+    }
+    /* 头部样式 */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 24px 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 14px;
+      position: relative;
+    }
+    .header h1{
+      font-size: 24px;
+      margin: 0 0 8px;
+      color: #fff;
+    }
+    .header .sub {
+      color: #e0e8ff;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    /* 编辑控制栏 */
+    .edit-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .btn-success {
+      background: var(--ok);
+      color: #062;
+      border-color: var(--ok);
+    }
+    /* 编辑模式提示 */
+    .edit-mode-indicator {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--warn);
+      color: #332a00;
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 13px;
+      z-index: 999;
+      display: none;
+    }
+    /* 可编辑元素样式 */
+    [contenteditable="true"] {
+      outline: 2px dashed transparent;
+      transition: outline 0.2s, background 0.2s;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    [contenteditable="true"]:hover {
+      background: rgba(64, 128, 255, 0.1);
+    }
+    [contenteditable="true"]:focus {
+      outline: 2px dashed var(--primary);
+      background: rgba(64, 128, 255, 0.15);
+    }
+    /* 网格布局 */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:12px;
+      margin-bottom: 20px;
+    }
+    /* 卡片样式 */
+    .card{
+      background:rgba(16,26,46,.92);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:20px;
+      height: 100%;
+    }
+    .card h2{
+      font-size:18px;
+      margin:0 0 16px;
+      color:#cfe0ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h2::before {
+      content: "";
+      display: block;
+      width: 4px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .card h3 {
+      font-size: 16px;
+      color: #cfe0ff;
+      margin: 16px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    /* 标签&徽章样式 */
+    .pill{
+      display:inline-block;
+      background:var(--tag);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:12px;
+      color:#cfe0ff;
+      margin-right:8px;
+      margin-bottom:6px;
+    }
+    .tag{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:11px;
+      border:1px solid var(--line);
+      background:#0c1529;
+      color:#cfe0ff;
+    }
+    .index-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 6px;
+    }
+    /* 指标样式 */
+    .kpi{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 16px 0;
+    }
+    .kpi .item{
+      background:#0c1529;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      min-width:180px;
+      flex: 1;
+    }
+    .kpi .t{color:var(--muted);font-size:12px}
+    .kpi .v{font-size:16px;margin-top:4px}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+    /* 表格样式 */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin: 16px 0;
+    }
+    th,td{
+      border-bottom:1px solid var(--line);
+      padding:12px 8px;
+      vertical-align:top;
+      font-size:13px;
+      line-height:1.5;
+    }
+    th{
+      color:#cfe0ff;
+      text-align:left;
+      font-weight:600;
+      background: #0c1529;
+    }
+    tr:hover {
+      background-color: rgba(12,21,41,0.5);
+    }
+    /* 时间轴样式 */
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin: 16px 0;
+    }
+    .timeline-item {
+      background: #0c1529;
+      border-radius: 6px;
+      padding: 15px;
+      border-left: 3px solid var(--primary);
+    }
+    .timeline-item .time {
+      font-weight: bold;
+      color: #cfe0ff;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .timeline-item .content {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .timeline-item .content p {
+      margin-bottom: 4px;
+    }
+    /* 列表样式 */
+    .value-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 12px 0;
+    }
+    .value-list li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .value-list li::before {
+      content: "✓";
+      color: var(--ok);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    /* 响应式 */
+    .col-12{grid-column:span 12}
+    .col-8{grid-column:span 8}
+    .col-4{grid-column:span 4}
+    .small{color:var(--muted);font-size:12px;line-height:1.6}
+    
+    @media (max-width:900px){
+      .col-8,.col-4{grid-column:span 12}
+      .timeline{grid-template-columns:repeat(2,1fr);}
+      .edit-controls {
+        position: static;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+    @media (max-width:600px){
+      .timeline{grid-template-columns:1fr;}
+      .kpi .item {min-width: 100%;}
+    }
+  </style>
+</head>
+<body>
+  <!-- 编辑模式提示 -->
+  <div class="edit-mode-indicator" id="editIndicator" style="display: none;">
+    ✏️ 编辑模式已开启 - 点击任意文字即可修改
+  </div>
+
+  <!-- 编辑控制按钮 -->
+  <div class="edit-controls">
+    <button class="btn" id="editBtn" onclick="toggleEditMode()">开启编辑模式</button>
+    <button class="btn btn-success" id="saveBtn" onclick="saveHTML()" style="display: none;">保存HTML文件</button>
+  </div>
+
+  <div class="wrap" id="mainContent">
+    <!-- 头部：愿景+使命+核心目标 -->
+    <div class="header">
+      <h1 contenteditable="false" class="editable">效能与品质保障事业部｜2026战略路径&amp;战役规划</h1>
+      <div class="sub editable" contenteditable="false">
+        愿景：以效能驱动增长，以稳定护航业务。<br>
+        使命：聚焦「稳定保障、效能提升、体验优化」，构建公司级交付与质量护城河。<br>
+        核心目标：核心区域稳定性SLA≥90%；应急/支持问题降幅≥30%；研发&amp;交付整体人效提升≥15%；云资源成本优化≥10%
+      </div>
+    </div>
+
+    <!-- 五大战役总览 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">五大战役总览</h2>
+        <div style="margin-bottom: 12px;">
+          <span class="pill editable" contenteditable="false">战役1｜AI提效全场景落地</span>
+          <span class="pill editable" contenteditable="false">战役2｜稳定性攻坚与质量升级</span>
+          <span class="pill editable" contenteditable="false">战役3｜伙伴云信息化建设</span>
+          <span class="pill editable" contenteditable="false">战役4｜云资源管理降本</span>
+          <span class="pill editable" contenteditable="false">战役5｜可观测平台与故障闭环</span>
+        </div>
+        <!-- 核心指标卡片 -->
+        <div class="kpi">
+          <div class="item"><div class="t editable" contenteditable="false">稳定性</div><div class="v editable" contenteditable="false">核心区域 SLA ≥ 90% &nbsp;/ <span class="warn">挑战95%</span></div></div>
+          <div class="item"><div class="t editable" contenteditable="false">故障治理</div><div class="v editable" contenteditable="false">应急/支持 ↓ ≥ 30% /&nbsp;<span class="warn">挑战40%</span></div></div>
+          <div class="item"><div class="t editable" contenteditable="false">研发人效</div><div class="v editable" contenteditable="false">人效 ↑ ≥ 15%/&nbsp;<span class="warn">挑战25%</span></div></div>
+          <div class="item"><div class="t editable" contenteditable="false">伙伴云推广</div><div class="v editable" contenteditable="false">推广率 ≥ 80% <span class="warn">挑战100%</span></div></div>
+          <div class="item"><div class="t editable" contenteditable="false">云成本优化</div><div class="v editable" contenteditable="false">成本 ↓ ≥ 10% <span class="warn">挑战15%</span></div></div>
+        </div>
+        <!-- 总览表格 -->
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 60px">编号</th>
+              <th>战役名称</th>
+              <th>核心目标</th>
+              <th style="width: 120px">牵头部门</th>
+              <th>核心量化指标</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="index-tag">1</span></td>
+              <td><strong class="editable" contenteditable="false">AI提效全场景落地战役</strong></td>
+              <td class="editable" contenteditable="false">AI技术深度融入研发/交付全流程，规模化降本增效</td>
+              <td class="editable" contenteditable="false">研发平台部<br>全部门协同</td>
+              <td class="editable" contenteditable="false">人效提升≥15%，AI智能体渗透率≥80%</td>
+            </tr>
+            <tr>
+              <td><span class="index-tag">2</span></td>
+              <td><strong class="editable" contenteditable="false">稳定性攻坚与质量体系升级战役</strong></td>
+              <td class="editable" contenteditable="false">全链路解决稳定性痛点，构建全流程质量保障体系</td>
+              <td class="editable" contenteditable="false">测试质控部<br>研发平台部</td>
+              <td class="editable" contenteditable="false">核心区域稳定性SLA≥90%，应急问题降幅≥30%</td>
+            </tr>
+            <tr>
+              <td><span class="index-tag">3</span></td>
+              <td><strong class="editable" contenteditable="false">伙伴云信息化建设战役</strong></td>
+              <td class="editable" contenteditable="false">打造统一协同与度量平台，实现研发全流程线上化</td>
+              <td class="editable" contenteditable="false">工程效能部<br>测试质控部</td>
+              <td class="editable" contenteditable="false">推广率≥80%，流程线上化率≥90%</td>
+            </tr>
+            <tr>
+              <td><span class="index-tag">4</span></td>
+              <td><strong class="editable" contenteditable="false">云资源管理降本战役</strong></td>
+              <td class="editable" contenteditable="false">构建FinOps体系，实现资源精细化管控与成本优化</td>
+              <td class="editable" contenteditable="false">工程效能部</td>
+              <td class="editable" contenteditable="false">成本优化≥10%，资源利用率提升≥30%</td>
+            </tr>
+            <tr>
+              <td><span class="index-tag">5</span></td>
+              <td><strong class="editable" contenteditable="false">可观测平台与故障全闭环治理战役</strong></td>
+              <td class="editable" contenteditable="false">构建全链路可观测体系，推广中台卫士2.0X，实现故障全生命周期闭环</td>
+              <td class="editable" contenteditable="false">工程效能部</td>
+              <td class="editable" contenteditable="false">监控覆盖率100%，<span class="s18" style="font-kerning: none; background-color: rgba(14, 20, 34, 0.92); color: rgb(228, 236, 255); font-family: &quot;PingFang SC&quot;; -webkit-text-stroke-color: rgb(228, 236, 255);">告警准确率</span><span class="s17" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-emoji: normal; font-size-adjust: none; font-language-override: normal; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; font-family: &quot;Helvetica Neue&quot;; font-kerning: none; background-color: rgba(14, 20, 34, 0.92); color: rgb(228, 236, 255); -webkit-text-stroke-color: rgb(228, 236, 255);">≥90%，</span><span class="s18" style="font-kerning: none; background-color: rgba(14, 20, 34, 0.92); color: rgb(228, 236, 255); font-family: &quot;PingFang SC&quot;; -webkit-text-stroke-color: rgb(228, 236, 255);">故障闭环率</span><span class="s17" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-emoji: normal; font-size-adjust: none; font-language-override: normal; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; font-family: &quot;Helvetica Neue&quot;; font-kerning: none; background-color: rgba(14, 20, 34, 0.92); color: rgb(228, 236, 255); -webkit-text-stroke-color: rgb(228, 236, 255);">≥80%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 战役1：AI提效 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">战役1：AI提效全场景落地战役</h2>
+        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
+        <ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：AI融入全流程体系中，研发/交付人效提升≥15%</li>
+          <li class="editable" contenteditable="false">组织价值：构建AI赋能的技术组织能力，打造行业领先的AI智能体工作流体系</li>
+          <li class="editable" contenteditable="false">可量化指标：核心场景AI智能体渗透率≥80%，重复性工作场景自动化智能体≥20个</li>
+        </ul>
+        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">430节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ AI基础设施部署完成</p>
+              <p class="editable" contenteditable="false">✅ 知识库上线运行，融入AI</p>
+              <p class="editable" contenteditable="false">✅ 全员AI培训体系运行，3个核心场景试点完成</p>
+              <p class="editable" contenteditable="false">📊 指标：AI智能体解决提效场景完成≥3个</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">630节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 5个核心AI场景落地</p>
+              <p class="editable" contenteditable="false">✅ AI火箭班建设完毕，虚拟小组启动实施</p>
+              <p class="editable" contenteditable="false">✅ 核心业务线覆盖率≥60%</p>
+              <p class="editable" contenteditable="false">📊 指标：人效提升≥5%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">930节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ AI场景覆盖研发/交付核心流程&gt;10个</p>
+              <p class="editable" contenteditable="false">✅ 16个核心AI场景落地</p>
+              <p class="editable" contenteditable="false">✅ 最佳实践沉淀完成</p>
+              <p class="editable" contenteditable="false">📊 指标：人效提升≥10%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">1230节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ AI场景覆盖大部分研发/交付核心流程&gt;20个</p>
+              <p class="editable" contenteditable="false">✅ AI研发体系全面固化</p>
+              <p class="editable" contenteditable="false">✅ 年度成果复盘与规划输出</p>
+              <p class="editable" contenteditable="false">📊 指标：人效提升≥15%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 战役2：稳定性 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">战役2：稳定性攻坚与质量体系升级战役</h2>
+        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
+        <ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：降低线上故障对业务的影响，提升客户体验与满意度</li>
+          <li class="editable" contenteditable="false">组织价值：构建标准化质量保障体系，提升团队风险防控能力</li>
+          <li class="editable" contenteditable="false">可量化指标：系统稳定性SLA≥90%，应急/支持问题降幅≥30%，故障复发率≤10%</li>
+        </ul>
+        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">430节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 微应用性能优化与医院<span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;">系统稳定升级完成3家医院</span></p>
+              <p class="editable" contenteditable="false">✅ Top3稳定性专项治理启动：内存、路由、前置、缓存</p>
+              <p class="editable" contenteditable="false">✅ 研发规范与质量门禁V1.0落地</p>
+              <p class="editable" contenteditable="false">📊 指标：应急问题环比降幅≥5%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">630节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ Top3专项治理全部完成；微应用、慢SQL、内存性能专项落地</p>
+              <p class="editable" contenteditable="false">✅ 全流程质量体系V1.0全量落地</p>
+              <p class="editable" contenteditable="false">✅ 版本发布机制全量推广，应急复盘优化机制落地</p>
+              <p class="editable" contenteditable="false">📊 指标：应急问题同比降幅≥10%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">930节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 质量体系V2.0优化升级</p>
+              <p class="editable" contenteditable="false">✅ 信创环境稳定性专项优化完成</p>
+              <p class="editable" contenteditable="false">✅ 长效运营机制落地</p>
+              <p class="editable" contenteditable="false">📊 指标：稳定性SLA持续≥90%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">1230节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 全年稳定性治理目标100%达成</p>
+              <p class="editable" contenteditable="false">✅ 行业级稳定性保障体系沉淀完成</p>
+              <p class="editable" contenteditable="false">✅ 年度复盘与2027年规划输出</p>
+              <p class="editable" contenteditable="false">📊 指标：全年问题降幅≥30%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 战役3：伙伴云 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">战役3：伙伴云信息化建设战役</h2>
+        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
+        <ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：打破数据孤岛，提升跨部门协同效率，为管理决策提供数据支撑</li>
+          <li class="editable" contenteditable="false">组织价值：构建标准化研发管理流程，提升组织精细化管理能力</li>
+          <li class="editable" contenteditable="false">可量化指标：全公司推广率≥80%，研发全流程线上化率≥90%</li>
+        </ul>
+        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">430节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 全事业部需求调研与流程梳理完成</p>
+              <p class="editable" contenteditable="false">✅ 核心功能开发完成并通过评审</p>
+              <p class="editable" contenteditable="false">✅ 试点事业部对接完成</p>
+              <p class="editable" contenteditable="false">📊 指标：核心功能完成率100%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">630节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 平台V1.0正式上线试运行</p>
+              <p class="editable" contenteditable="false">✅ 全公司推广率≥80%</p>
+              <p class="editable" contenteditable="false">✅ 用友对接开发试点完毕，度量看板与指标体系上线</p>
+              <p class="editable" contenteditable="false">📊 指标：流程线上化率≥80%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">930节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 平台V2.0升级，用友系统对接完成</p>
+              <p class="editable" contenteditable="false">✅ 工单与复盘模块上线</p>
+              <p class="editable" contenteditable="false">✅ 效能度量体系全面落地</p>
+              <p class="editable" contenteditable="false">📊 指标：全公司覆盖率≥90%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">1230节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 公司级数字化研发体系全面固化</p>
+              <p class="editable" contenteditable="false">✅ 平台全场景覆盖，成为核心管理平台</p>
+              <p class="editable" contenteditable="false">✅ 年度运营成果复盘与规划输出</p>
+              <p class="editable" contenteditable="false">📊 指标：全公司覆盖率100%，流程线上化率100%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 战役4：云资源降本 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">战役4：云资源管理降本战役</h2>
+        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
+        <ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：全年云资源成本节省≥10%，提升资源利用率</li>
+          <li class="editable" contenteditable="false">组织价值：构建精细化成本管控体系，培养团队成本意识</li>
+          <li class="editable" contenteditable="false">可量化指标：成本优化≥10%，资源利用率提升≥50%，闲置资源清理率100%</li>
+        </ul>
+        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">430节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 资源全量盘点与成本分析完成</p>
+              <p class="editable" contenteditable="false">✅ 资源管理制度与流程V1.0发布</p>
+              <p class="editable" contenteditable="false">✅ 供应商迁移方案制定完成，开始部分迁移工作</p>
+              <p class="editable" contenteditable="false">📊 指标：闲置资源清理率≥50%，成本优化≥3%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">630节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 云资源迁移全部完成</p>
+              <p class="editable" contenteditable="false">✅ FinOps体系V1.0落地</p>
+              <p class="editable" contenteditable="false">✅ 成本监控可视化看板上线</p>
+              <p class="editable" contenteditable="false">📊 指标：成本优化≥5%，资源利用率提升≥30%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">930节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 成本管控体系V2.0升级</p>
+              <p class="editable" contenteditable="false">✅ 弹性扩缩容机制全量落地</p>
+              <p class="editable" contenteditable="false">✅ 成本分摊与考核机制落地</p>
+              <p class="editable" contenteditable="false">📊 指标：成本优化≥8%，资源利用率提升≥40%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">1230节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 全年成本优化目标100%达成</p>
+              <p class="editable" contenteditable="false">✅ 公司级FinOps体系全面固化</p>
+              <p class="editable" contenteditable="false">✅ 年度复盘与2027年规划输出</p>
+              <p class="editable" contenteditable="false">📊 指标：全年成本优化≥10%，资源利用率提升≥50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 战役5：可观测&故障闭环 -->
+    <div class="grid">
+      <div class="card col-12">
+        <h2 contenteditable="false" class="editable">战役5：可观测平台与故障全闭环治理战役</h2>
+        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
+        <ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：故障发现及时率≥80%，大幅减少业务损失</li>
+          <li class="editable" contenteditable="false">组织价值：构建标准化故障管理体系，提升团队运维运营能力</li>
+          <li class="editable" contenteditable="false">可量化指标：核心系统监控覆盖率100%，告警准确率≥90%，故障闭环率≥80%</li>
+        </ul>
+        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">430节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 平台需求调研与方案设计完成</p>
+              <p class="editable" contenteditable="false">✅ 核心系统基础监控100%覆盖</p>
+              <p class="editable" contenteditable="false">✅ 告警分级与收敛规则发布</p>
+              <p class="editable" contenteditable="false">📊 指标：监控覆盖率100%，告警准确率≥70%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">630节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 可观测平台V1.0上线运行</p>
+              <p class="editable" contenteditable="false">✅ 三位一体监控体系落地</p>
+              <p class="editable" contenteditable="false">✅ 工单闭环与复盘模块上线</p>
+              <p class="editable" contenteditable="false">📊 指标：业务系统监控覆盖率≥80%，告警准确率≥80%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">930节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 平台V2.0升级，AI智能告警上线</p>
+              <p class="editable" contenteditable="false">✅ 全业务系统监控100%覆盖</p>
+              <p class="editable" contenteditable="false">✅ 故障全生命周期体系落地</p>
+              <p class="editable" contenteditable="false">📊 指标：告警准确率≥95%，监控覆盖率≥90%</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time editable" contenteditable="false">1230节点</div>
+            <div class="content">
+              <p class="editable" contenteditable="false">✅ 全年建设目标100%达成</p>
+              <p class="editable" contenteditable="false">✅ 公司级可观测体系全面固化</p>
+              <p class="editable" contenteditable="false">✅ 年度复盘与2027年规划输出</p>
+              <p class="editable" contenteditable="false">📊 指标：监控覆盖率100%，<span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;">故障闭环率≥80%</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部说明 -->
+    <div class="small" style="margin-top: 20px; text-align: center;">
+      说明：达标线/挑战线为管理目标。云成本节省目标存在“3% vs 18%”口径差异，需在事业部最终OKR中统一。
+    </div>
+  </div>
+
+  <script>
+    let isEditMode = false;
+
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      const editBtn = document.getElementById('editBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      const editIndicator = document.getElementById('editIndicator');
+      const editables = document.querySelectorAll('.editable');
+
+      if (isEditMode) {
+        editBtn.textContent = '退出编辑模式';
+        editBtn.classList.add('btn-primary');
+        saveBtn.style.display = 'block';
+        editIndicator.style.display = 'block';
+        
+        editables.forEach(el => {
+          el.setAttribute('contenteditable', 'true');
+        });
+      } else {
+        editBtn.textContent = '开启编辑模式';
+        editBtn.classList.remove('btn-primary');
+        saveBtn.style.display = 'none';
+        editIndicator.style.display = 'none';
+        
+        editables.forEach(el => {
+          el.setAttribute('contenteditable', 'false');
+        });
+      }
+    }
+
+    function saveHTML() {
+      // 先退出编辑模式，避免保存编辑状态
+      if (isEditMode) {
+        toggleEditMode();
+      }
+
+      // 获取当前HTML内容
+      let htmlContent = '<!doctype html>\n' + document.documentElement.outerHTML;
+      
+      // 创建Blob对象
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      
+      // 创建下载链接
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '战略规划_' + new Date().toISOString().slice(0,10) + '.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // 提示保存成功
+      alert('✅ 文件已保存！请查看下载文件夹。');
+    }
+  </script>
+
+
+</body></html>
