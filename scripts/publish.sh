@@ -39,8 +39,11 @@ render_versions_index() {
   local file
   local display
   local name
+  local -a files=()
 
-  mapfile -t files < <(
+  while IFS= read -r name; do
+    files+=("$name")
+  done < <(
     for file in "${versions_dir}"/*.html; do
       [[ -e "$file" ]] || continue
       name="$(basename "$file")"
