@@ -14,8 +14,15 @@
 - `index.html`：最新版页面入口（GitHub Pages 根目录发布）
 - `home.html`：导航页（入口聚合）
 - `versions/`：历史版本归档目录
+- `auth.js`：前端密码校验脚本（防君子方案）
 - `scripts/publish.sh`：一键发布脚本（自动归档、更新列表、提交、推送）
 - `README.md`：项目说明
+
+## 访问密码
+
+- 当前密码：`Hubert@2026`
+- 修改位置：[auth.js](/Users/yuanqi/Documents/Codex/strategy-2026/auth.js) 中 `PASSWORD` 常量
+- 说明：该方案仅为前端校验，适合轻保护，不是强安全方案
 
 ## 一键发布（推荐）
 

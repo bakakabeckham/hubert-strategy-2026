@@ -33,6 +33,22 @@ html_escape() {
   printf '%s' "$value"
 }
 
+ensure_auth_script() {
+  local target_file="$1"
+  local auth_path="$2"
+
+  if grep -q 'auth.js' "$target_file"; then
+    return
+  fi
+
+  if ! grep -qi '</head>' "$target_file"; then
+    echo "错误: 无法注入密码脚本（未找到 </head>）: $target_file"
+    exit 1
+  fi
+
+  perl -0777 -i -pe 's#</head>#  <script src="'"$auth_path"'"></script>\n</head>#i' "$target_file"
+}
+
 render_versions_index() {
   local versions_dir="$1"
   local output_file="$2"
@@ -143,6 +159,7 @@ render_versions_index() {
       word-break: break-all;
     }
   </style>
+  <script src="../auth.js"></script>
 </head>
 <body>
   <main class="wrap">
@@ -253,6 +270,9 @@ archive_path="${VERSIONS_DIR}/${archive_name}"
 
 cp "$SOURCE_FILE" "$MAIN_INDEX"
 cp "$SOURCE_FILE" "$archive_path"
+
+ensure_auth_script "$MAIN_INDEX" "./auth.js"
+ensure_auth_script "$archive_path" "../auth.js"
 
 render_versions_index "$VERSIONS_DIR" "$VERSIONS_INDEX"
 
