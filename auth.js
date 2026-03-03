@@ -2,6 +2,24 @@
   var PASSWORD = "yuanqi20181818";
   var STORAGE_KEY = "strategy_pages_auth_v1";
   var MAX_ATTEMPTS = 3;
+  var contentMaskStyleEl = null;
+
+  function applyContentMask() {
+    if (contentMaskStyleEl) {
+      return;
+    }
+    contentMaskStyleEl = document.createElement("style");
+    contentMaskStyleEl.setAttribute("data-auth-mask", "1");
+    contentMaskStyleEl.textContent = "body{visibility:hidden !important;}";
+    document.documentElement.appendChild(contentMaskStyleEl);
+  }
+
+  function revealContent() {
+    if (contentMaskStyleEl && contentMaskStyleEl.parentNode) {
+      contentMaskStyleEl.parentNode.removeChild(contentMaskStyleEl);
+    }
+    contentMaskStyleEl = null;
+  }
 
   function setAuthorized() {
     try {
@@ -135,7 +153,7 @@
       modal.appendChild(input);
       modal.appendChild(footer);
       overlay.appendChild(modal);
-      (document.body || document.documentElement).appendChild(overlay);
+      document.documentElement.appendChild(overlay);
 
       setTimeout(function () {
         input.focus();
@@ -173,14 +191,15 @@
     return;
   }
 
-  document.documentElement.style.visibility = "hidden";
+  applyContentMask();
+
   verifyAccess()
     .then(function (ok) {
       if (!ok) {
         denyAccess();
         return;
       }
-      document.documentElement.style.visibility = "";
+      revealContent();
     })
     .catch(function () {
       denyAccess();
