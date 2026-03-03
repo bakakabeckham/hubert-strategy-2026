@@ -1,5 +1,5 @@
 (function () {
-  var PASSWORD = "Hubert@2026";
+  var PASSWORD = "yuanqi20181818";
   var STORAGE_KEY = "strategy_pages_auth_v1";
   var MAX_ATTEMPTS = 3;
 
