@@ -147,6 +147,27 @@
       padding-bottom: 6px;
       border-bottom: 1px solid var(--line);
     }
+    .collapsible-trigger {
+      cursor: pointer;
+      position: relative;
+      padding-right: 22px;
+    }
+    .collapsible-trigger::after {
+      content: "▾";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+    }
+    .collapsible-trigger.is-collapsed::after {
+      content: "▸";
+    }
+    .collapse-content {
+      margin-top: 0;
+    }
     /* 标签&徽章样式 */
     .pill{
       display:inline-block;
@@ -217,6 +238,51 @@
     tr:hover {
       background-color: rgba(12,21,41,0.5);
     }
+    .ai-battle-table {
+      border: 1px solid #2a3d63;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .ai-battle-table th {
+      background: linear-gradient(180deg, #13203b, #0e1930);
+      color: #d8e6ff;
+      font-size: 12px;
+      letter-spacing: .2px;
+    }
+    .ai-battle-table td {
+      background: rgba(10,18,34,.78);
+    }
+    .ai-battle-table tr:hover td {
+      background: rgba(33,52,86,.45);
+    }
+    .ai-battle-table .sb-name {
+      color: #8fc3ff;
+      font-weight: 700;
+    }
+    .ai-battle-table .sb-icon {
+      color: var(--warn);
+      margin-right: 6px;
+    }
+    .ai-battle-table .goal-cell {
+      color: #7df1c1;
+      font-weight: 600;
+    }
+    .phase-tag {
+      display: inline-block;
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      margin-right: 6px;
+      border: 1px solid var(--line);
+      background: #0c1529;
+      color: #cfe0ff;
+      white-space: nowrap;
+    }
+    .phase-430 { border-color: rgba(64,128,255,.65); color: #9dc3ff; }
+    .phase-630 { border-color: rgba(70,211,154,.65); color: #86e8bb; }
+    .phase-930 { border-color: rgba(255,209,102,.65); color: #ffd77c; }
+    .phase-1230 { border-color: rgba(255,92,122,.55); color: #ff95a8; }
     /* 时间轴样式 */
     .timeline{
       display:grid;
@@ -326,7 +392,7 @@
             <div class="t editable" contenteditable="false" style="font-size:14px;color:#e9f0ff;">研发/交付人效 <span class="tag" style="margin-left:8px;border-color:rgba(255,209,102,.7);background:rgba(255,209,102,.10);color:var(--warn);">结果指标</span>
             </div>
             <div class="v editable" contenteditable="false" style="font-size:22px;margin-top:8px;">
-              人效 ↑ ≥ 保底15%/达标20%/&nbsp;<span class="warn">挑战25%</span></div>
+              人效 ↑ ≥ 保底15%/<span class="ok">达标20%</span>/&nbsp;<span class="warn">挑战25%</span></div>
           </div>
         </div>
 
@@ -355,7 +421,7 @@
               <td><strong class="editable" contenteditable="false">AI提效全场景落地战役</strong></td>
               <td class="editable" contenteditable="false">AI技术深度融入研发/交付全流程，规模化降本增效</td>
               <td class="editable" contenteditable="false">研发平台部<br>全部门协同</td>
-              <td class="editable" contenteditable="false">人效提升≥20%，AI智能体渗透率≥80%</td>
+              <td class="editable" contenteditable="false">人效提升≥20%，Skills智能体累计上线≥15个</td>
             </tr>
             <tr>
               <td><span class="index-tag">2</span></td>
@@ -393,67 +459,76 @@
     <!-- 战役1：AI提效 -->
     <div class="grid">
       <div class="card col-12">
-        <h2 contenteditable="false" class="editable">战役1：AI提效全场景落地战役</h2>
-        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
-        <ul class="value-list">
-          <li class="editable" contenteditable="false">业务价值：AI融入全流程体系中，研发/交付人效提升≥20%</li>
-          <li class="editable" contenteditable="false">组织价值：构建AI赋能的技术组织能力，打造适合公司工作流的AI智能体系</li>
-          <li class="editable" contenteditable="false">可量化指标：核心场景AI智能体渗透率≥80%，重复性工作场景自动化智能体≥20个</li>
-        </ul>
-        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="time editable" contenteditable="false">430节点</div>
-            <div class="content">
-              <p class="editable" contenteditable="false">✅ AI基础设施部署完成</p>
-              <p class="editable" contenteditable="false">✅ 知识库上线运行，融入AI</p>
-              <p class="editable" contenteditable="false">✅ 全员AI培训体系运行</p><div><div><span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;">✅</span><span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;">&nbsp;</span>3个AI核心场景试点完成</div></div><p></p>
-              <p class="editable" contenteditable="false">📊 指标：AI智能体解决提效场景完成≥3个</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="time editable" contenteditable="false">630节点</div>
-            <div class="content">
-              <p class="editable" contenteditable="false">✅ 5个核心AI场景落地</p>
-              <p class="editable" contenteditable="false">✅ AI火箭班建设完毕，虚拟小组启动实施</p>
-              <p class="editable" contenteditable="false">✅ 核心业务线覆盖率≥60%</p>
-              <p class="editable" contenteditable="false">📊 指标：人效提升≥5%</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="time editable" contenteditable="false">930节点</div>
-            <div class="content">
-              <p class="editable" contenteditable="false">✅ AI场景覆盖研发/交付核心流程&gt;10个</p>
-              <p class="editable" contenteditable="false">✅ 16个核心AI场景落地</p>
-              <p class="editable" contenteditable="false">✅ 最佳实践沉淀完成</p>
-              <p class="editable" contenteditable="false">📊 指标：人效提升≥15%</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="time editable" contenteditable="false">1230节点</div>
-            <div class="content">
-              <p class="editable" contenteditable="false">✅ AI场景覆盖大部分研发/交付核心流程&gt;20个</p>
-              <p class="editable" contenteditable="false">✅ AI开发模式变革、研发体系全面固化</p>
-              <p class="editable" contenteditable="false">✅ 年度成果复盘与规划输出</p>
-              <p class="editable" contenteditable="false">📊 指标：人效提升≥20%</p>
-            </div>
-          </div>
-        </div>
+        <h2 contenteditable="false" class="editable collapsible-trigger" data-collapse-bound="1" role="button" tabindex="0" aria-expanded="true">战役1：AI提效全场景落地战役</h2>
+        <div class="collapse-content" style=""><h3 contenteditable="false" class="editable">核心价值与收益</h3><ul class="value-list">
+          <li class="editable" contenteditable="false">业务价值：围绕低代码交付、开发模式变革与办公skills智能体三条主线，缩短研发周期/提升交付效率，培养“超级工长”</li>
+          <li class="editable" contenteditable="false">组织价值：沉淀可复制的AI研发新模式，推进角色合并与“超级员工”样板，形成组织级赋能闭环。</li>
+          <li class="editable" contenteditable="false">可量化指标：低代码高价值场景累计<span style="background-color: rgba(33, 52, 86, 0.45);">≥6</span>个；超级员工样板累计≥8人；Skills智能体累计上线≥15个。</li>
+        </ul><h3 contenteditable="false" class="editable">AI提效子战役</h3><table class="ai-battle-table">
+          <thead>
+            <tr>
+              <th>子战役</th>
+              <th>战略说明</th>
+              <th>场景价值</th>
+              <th>核心路径</th>
+              <th>目标</th>
+              <th>430</th>
+              <th>630</th>
+              <th>930</th>
+              <th>1230</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong class="editable sb-name" contenteditable="false"><span class="sb-icon">◆</span>AI+低代码交付加速引擎</strong></td>
+              <td class="editable" contenteditable="false">AI+低代码高频开发场景，提升交付吞吐与上线效率</td>
+              <td class="editable" contenteditable="false">提升高频低效交付场景的效率</td>
+              <td class="editable" contenteditable="false">低代码业务相关的AI场景开发，比如：二次封装、报表、插件开发、后端接口生成、页面生成</td>
+              <td class="editable goal-cell" contenteditable="false">年度形成低代码AI提效标准方案，累计落地≥6个高价值场景</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-430">430</span>完成跨事业部痛点访谈与场景池梳理，确定首批1-2个MVP（页面生成/接口生成）</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-630">630</span>累计落地1-3个场景，闭环并接入交付流程</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-930">930</span>累计落地4-5个场景，完成跨团队推广，交付吞吐显著提升</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-1230">1230</span>累计落地≥6个场景，形成低代码AI提效手册与长效运营机制</td>
+            </tr>
+            <tr>
+              <td><strong class="editable sb-name" contenteditable="false"><span class="sb-icon">◆</span>AI+研发模式变革引擎</strong></td>
+              <td class="editable" contenteditable="false">量化沉淀全新AI开发模式经验，推动“超级工长（一人承担多角色）”开发方式落地</td>
+              <td class="editable" contenteditable="false">通过可观测系统、前置系统等非核心项目先行验证，沉淀可复制的开发新模式能力经验，并形成“单人多角色”高效作业样板</td>
+              <td class="editable" contenteditable="false">1、以非核心业务项目为试点，构建“需求拆解-代码生成-测试验证-部署发布-复盘沉淀”的全AI开发交付能力；<br>2、同步推进产品/开发/测试/运维角色合并，探索一人全链路交付模式</td>
+              <td class="editable goal-cell" contenteditable="false">年度沉淀新模式实践案例；形成≥3名“超级工长”样板；完成核心岗位角色合并机制落地</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-430">430</span>完成试点项目和角色合并方案；沉淀新模式案例≥1个，识别超级员工候选≥1人</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-630">630</span>完成首批端到端试点交付并阶段复盘；沉淀新模式案例累计≥3个，培养超级工长≥2人</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-930">930</span>扩展到更多非核心项目并固化机制；沉淀新模式案例累计≥5个，培养超级工长≥3人，角色合并覆盖关键环节</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-1230">1230</span>发布AI变革模式手册并组织级推广；沉淀新模式案例累计≥8个，培养超级工长≥8人，形成年度效率提升报告</td>
+            </tr>
+            <tr>
+              <td><strong class="editable sb-name" contenteditable="false"><span class="sb-icon">◆</span>AI+组织赋能与办公智能体平台</strong></td>
+              <td class="editable" contenteditable="false">从AI基础设施、赋能培训到办公智能体应用形成闭环，持续产出可度量的组织效能增量。</td>
+              <td class="editable" contenteditable="false">1、AI基础设施（AI账号、私有模型建设；成本管控申请规范建设）<br>2、培训赋能知识能力沉淀（前3个月组织内部全员进行AI赋能，后3个月实战演练）<br>3、收集日常办公SOP场景痛点，实现Skills智能体办公场景提效，如：快速开发、自动化测试、前后端联调串通、RPA业务自动化等<br>4、构建智能体度量体系，收集智能体使用效果和提效数据，提供优化策略</td>
+              <td class="editable" contenteditable="false">基础设施标准化<br>AI团队赋能<br>Skills智能体<br>度量评估闭环</td>
+              <td class="editable goal-cell" contenteditable="false">430前完成Skills智能体调研与实施方案<br>630/930/1230分阶段完成实现落地，年度累计上线高价值Skills≥15个</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-430">430<br></span><br>1、完成Skills智能体专项调研（场景盘点、优先级分层、技术可行性评估），输出实施路线图与立项清单<br>2、培训模式常态化运行<br>3、AI基础设施规范建设完毕</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-630">630</span>启动Skills智能体第一阶段实现，完成核心场景开发与试运行，累计上线Skills智能体≥5个</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-930">930</span>推进Skills智能体第二阶段实现，扩展跨团队高频场景并建立度量看板，累计上线Skills智能体≥10个</td>
+              <td class="editable" contenteditable="false"><span class="phase-tag phase-1230">1230</span>完成Skills智能体第三阶段实现与组织级推广，形成年度复盘与优化闭环，累计上线Skills智能体≥15个</td>
+            </tr>
+          </tbody>
+        </table></div>
+        
+        
+        
       </div>
     </div>
 
     <!-- 战役2：稳定性 -->
     <div class="grid">
       <div class="card col-12">
-        <h2 contenteditable="false" class="editable">战役2：稳定性攻坚与质量体系升级战役</h2>
-        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
-        <ul class="value-list">
+        <h2 contenteditable="false" class="editable collapsible-trigger" data-collapse-bound="1" role="button" tabindex="0" aria-expanded="true">战役2：稳定性攻坚与质量体系升级战役</h2>
+        <div class="collapse-content"><h3 contenteditable="false" class="editable">核心价值与收益</h3><ul class="value-list">
           <li class="editable" contenteditable="false">业务价值：降低线上故障对业务的影响，提升客户体验与满意度</li>
           <li class="editable" contenteditable="false">组织价值：构建标准化质量保障体系，提升团队风险防控能力</li>
           <li class="editable" contenteditable="false">可量化指标：系统稳定性SLA≥90%，应急/支持问题降幅≥30%，故障复发率≤10%</li>
-        </ul>
-        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
-        <div class="timeline">
+        </ul><h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3><div class="timeline">
           <div class="timeline-item">
             <div class="time editable" contenteditable="false">430节点</div>
             <div class="content">
@@ -490,22 +565,22 @@
               <p class="editable" contenteditable="false">📊 指标：全年应急/支持问题降幅≥30%</p>
             </div>
           </div>
-        </div>
+        </div></div>
+        
+        
+        
       </div>
     </div>
 
     <!-- 战役3：伙伴云 -->
     <div class="grid">
       <div class="card col-12">
-        <h2 contenteditable="false" class="editable">战役3：伙伴云信息化建设战役</h2>
-        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
-        <ul class="value-list">
+        <h2 contenteditable="false" class="editable collapsible-trigger" data-collapse-bound="1" role="button" tabindex="0" aria-expanded="true">战役3：伙伴云信息化建设战役</h2>
+        <div class="collapse-content"><h3 contenteditable="false" class="editable">核心价值与收益</h3><ul class="value-list">
           <li class="editable" contenteditable="false">业务价值：打破数据孤岛，提升跨部门协同效率，为管理决策提供数据支撑</li>
           <li class="editable" contenteditable="false">组织价值：构建标准化研发管理流程，提升组织精细化管理能力</li>
           <li class="editable" contenteditable="false">可量化指标：全公司推广率≥80%，研发全流程线上化率≥90%</li>
-        </ul>
-        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
-        <div class="timeline">
+        </ul><h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3><div class="timeline">
           <div class="timeline-item">
             <div class="time editable" contenteditable="false">430节点</div>
             <div class="content">
@@ -542,22 +617,22 @@
               <p class="editable" contenteditable="false">📊 指标：全公司覆盖率100%，流程线上化率100%</p>
             </div>
           </div>
-        </div>
+        </div></div>
+        
+        
+        
       </div>
     </div>
 
     <!-- 战役4：云资源降本 -->
     <div class="grid">
       <div class="card col-12">
-        <h2 contenteditable="false" class="editable">战役4：云资源管理降本战役</h2>
-        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
-        <ul class="value-list">
+        <h2 contenteditable="false" class="editable collapsible-trigger" data-collapse-bound="1" role="button" tabindex="0" aria-expanded="true">战役4：云资源管理降本战役</h2>
+        <div class="collapse-content"><h3 contenteditable="false" class="editable">核心价值与收益</h3><ul class="value-list">
           <li class="editable" contenteditable="false">业务价值：全年云资源成本节省≥10%，提升资源利用率</li>
           <li class="editable" contenteditable="false">组织价值：构建精细化成本管控体系，培养团队成本意识</li>
           <li class="editable" contenteditable="false">可量化指标：成本优化≥10%，资源利用率提升≥50%，闲置资源清理率100%</li>
-        </ul>
-        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
-        <div class="timeline">
+        </ul><h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3><div class="timeline">
           <div class="timeline-item">
             <div class="time editable" contenteditable="false">430节点</div>
             <div class="content">
@@ -594,22 +669,22 @@
               <p class="editable" contenteditable="false">📊 指标：全年成本优化≥10%，资源利用率提升≥50%</p>
             </div>
           </div>
-        </div>
+        </div></div>
+        
+        
+        
       </div>
     </div>
 
     <!-- 战役5：可观测&故障闭环 -->
     <div class="grid">
       <div class="card col-12">
-        <h2 contenteditable="false" class="editable">战役5：可观测平台与故障全闭环治理战役</h2>
-        <h3 contenteditable="false" class="editable">核心价值与收益</h3>
-        <ul class="value-list">
+        <h2 contenteditable="false" class="editable collapsible-trigger" data-collapse-bound="1" role="button" tabindex="0" aria-expanded="true">战役5：可观测平台与故障全闭环治理战役</h2>
+        <div class="collapse-content"><h3 contenteditable="false" class="editable">核心价值与收益</h3><ul class="value-list">
           <li class="editable" contenteditable="false">业务价值：故障发现及时率≥80%，大幅减少业务损失</li>
           <li class="editable" contenteditable="false">组织价值：构建标准化故障管理体系，提升团队运维运营能力</li>
           <li class="editable" contenteditable="false">可量化指标：核心系统监控覆盖率100%，告警准确率≥90%，故障闭环率≥80%</li>
-        </ul>
-        <h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3>
-        <div class="timeline">
+        </ul><h3 contenteditable="false" class="editable">分阶段里程碑（430/630/930/1230）</h3><div class="timeline">
           <div class="timeline-item">
             <div class="time editable" contenteditable="false">430节点</div>
             <div class="content">
@@ -646,7 +721,10 @@
               <p class="editable" contenteditable="false">📊 指标：监控覆盖率100%，<span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;">故障闭环率≥80%</span></p>
             </div>
           </div>
-        </div>
+        </div></div>
+        
+        
+        
       </div>
     </div>
 
@@ -658,6 +736,107 @@
 
   <script>
     let isEditMode = false;
+
+    function makeCollapsible(triggerEl, contentEls) {
+      if (!triggerEl || !contentEls || contentEls.length === 0) {
+        return;
+      }
+      if (triggerEl.dataset.collapseBound === '1') {
+        return;
+      }
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'collapse-content';
+      contentEls[0].before(wrapper);
+      contentEls.forEach(el => {
+        wrapper.appendChild(el);
+      });
+
+      triggerEl.classList.add('collapsible-trigger');
+      triggerEl.dataset.collapseBound = '1';
+      triggerEl.setAttribute('role', 'button');
+      triggerEl.setAttribute('tabindex', '0');
+      triggerEl.setAttribute('aria-expanded', 'true');
+
+      const syncAria = () => {
+        triggerEl.setAttribute(
+          'aria-expanded',
+          triggerEl.classList.contains('is-collapsed') ? 'false' : 'true'
+        );
+      };
+
+      const toggle = () => {
+        if (isEditMode) {
+          return;
+        }
+        triggerEl.classList.toggle('is-collapsed');
+        wrapper.style.display = triggerEl.classList.contains('is-collapsed') ? 'none' : '';
+        syncAria();
+      };
+
+      triggerEl.addEventListener('click', () => {
+        const selected = window.getSelection ? window.getSelection().toString() : '';
+        if (selected) {
+          return;
+        }
+        toggle();
+      });
+
+      triggerEl.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggle();
+        }
+      });
+    }
+
+    function setupBattleCollapsible() {
+      const battleHeads = Array.from(document.querySelectorAll('.grid .card.col-12 > h2.editable'))
+        .filter(el => (el.textContent || '').trim().startsWith('战役'));
+
+      const battle1Head = battleHeads.find(el => (el.textContent || '').trim().startsWith('战役1'));
+      if (battle1Head) {
+        let node = battle1Head.nextElementSibling;
+        while (node) {
+          const isSubBattle =
+            node.tagName === 'H3' &&
+            (node.textContent || '').trim().startsWith('子战役');
+          if (!isSubBattle) {
+            node = node.nextElementSibling;
+            continue;
+          }
+
+          const sectionEls = [];
+          let cursor = node.nextElementSibling;
+          while (
+            cursor &&
+            !(
+              cursor.tagName === 'H3' &&
+              (cursor.textContent || '').trim().startsWith('子战役')
+            )
+          ) {
+            const next = cursor.nextElementSibling;
+            sectionEls.push(cursor);
+            cursor = next;
+          }
+          makeCollapsible(node, sectionEls);
+          node = cursor;
+        }
+      }
+
+      battleHeads.forEach(head => {
+        const sectionEls = [];
+        let cursor = head.nextElementSibling;
+        while (cursor) {
+          const next = cursor.nextElementSibling;
+          sectionEls.push(cursor);
+          cursor = next;
+        }
+        makeCollapsible(head, sectionEls);
+      });
+    }
+
+    setupBattleCollapsible();
 
     function toggleEditMode() {
       isEditMode = !isEditMode;
@@ -713,6 +892,8 @@
       alert('✅ 文件已保存！请查看下载文件夹。');
     }
   </script>
+
+
 
 
 
