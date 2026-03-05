@@ -706,7 +706,7 @@
   </style>
   <script src="./auth.js"></script>
 </head>
-<body>
+<body class="">
   <!-- 编辑模式提示 -->
   <div class="edit-mode-indicator" id="editIndicator" style="display: none;">
     ✏️ 编辑模式已开启 - 点击任意文字即可修改
@@ -721,7 +721,6 @@
   <div class="wrap" id="mainContent">
     <div class="theme-bar">
       <label class="theme-switch" for="themeModeSelect">
-        页面样式
         <select id="themeModeSelect">
           <option value="standard">标准版</option>
           <option value="conference">会议大屏版</option>
@@ -857,14 +856,14 @@
             <div class="time editable" contenteditable="false">630节点</div>
             <div class="content">
               <p class="editable" contenteditable="false">✅ 累计落地2个场景，闭环并接入交付流程</p>
-              <p class="editable" contenteditable="false">✅ 覆盖二次封装、报表、插件等场景</p>
+              <p class="editable" contenteditable="false">✅ 覆盖二次封装等场景</p>
               <p class="editable" contenteditable="false">📊 指标：累计落地场景≥2个</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="time editable" contenteditable="false">930节点</div>
             <div class="content">
-              <p class="editable" contenteditable="false">✅ 累计落地4个场景，完成跨团队推广</p>
+              <p class="editable" contenteditable="false">✅ 累计落地4个场景，完成跨团队推广，如：报表、插件等</p>
               <p class="editable" contenteditable="false">✅ 低代码交付吞吐显著提升</p>
               <p class="editable" contenteditable="false">📊 指标：累计落地场景≥4个</p>
             </div>
@@ -873,7 +872,7 @@
             <div class="time editable" contenteditable="false">1230节点</div>
             <div class="content">
               <p class="editable" contenteditable="false">✅ 累计落地≥6个场景</p>
-              <p class="editable" contenteditable="false">✅ 实现低代码应用构建</p>
+              <p class="editable" contenteditable="false">✅ 实现低代码应用页面构建场景</p>
               <p class="editable" contenteditable="false">📊 指标：年度累计落地场景≥6个</p>
             </div>
           </div>
@@ -903,7 +902,7 @@
             <div class="time editable" contenteditable="false">630节点</div>
             <div class="content">
               <p class="editable" contenteditable="false">✅ 完成首批端到端试点交付并阶段复盘</p>
-              <p class="editable" contenteditable="false">✅ 完成前3个月全员AI赋能培训，沉淀新模式案例累计≥3个，培养超级工长≥2人<div>✅ 拉通总结事业部AI研发模式经验，沉淀AI工具链</div></p>
+              <p class="editable" contenteditable="false">✅ 完成前3个月全员AI赋能培训，沉淀新模式案例累计≥3个，培养超级工长≥2人</p><div>✅ 拉通总结事业部AI研发模式经验，沉淀AI工具链</div><p></p>
               <p class="editable" contenteditable="false">📊 指标：案例累计≥2个；超级工长≥2人；培训覆盖率</p>
             </div>
           </div>
@@ -1246,20 +1245,15 @@
       const initialCollapsed =
         triggerEl.classList.contains('is-collapsed') || wrapper.style.display === 'none';
       syncState(initialCollapsed);
-      if (triggerEl.dataset.collapseEventBound === '1') {
-        return;
-      }
-      triggerEl.dataset.collapseEventBound = '1';
-
-      triggerEl.addEventListener('click', () => {
+      const handleClick = () => {
         const selected = window.getSelection ? window.getSelection().toString() : '';
         if (selected) {
           return;
         }
         toggle();
-      });
+      };
 
-      triggerEl.addEventListener('keydown', (event) => {
+      const handleKeydown = (event) => {
         if (isEditMode) {
           return;
         }
@@ -1267,7 +1261,21 @@
           event.preventDefault();
           toggle();
         }
-      });
+      };
+
+      if (triggerEl.__collapseClickHandler) {
+        triggerEl.removeEventListener('click', triggerEl.__collapseClickHandler);
+      }
+      if (triggerEl.__collapseKeydownHandler) {
+        triggerEl.removeEventListener('keydown', triggerEl.__collapseKeydownHandler);
+      }
+
+      triggerEl.__collapseClickHandler = handleClick;
+      triggerEl.__collapseKeydownHandler = handleKeydown;
+      triggerEl.dataset.collapseEventBound = '1';
+
+      triggerEl.addEventListener('click', handleClick);
+      triggerEl.addEventListener('keydown', handleKeydown);
     }
 
     function setupBattleCollapsible() {
@@ -1383,6 +1391,7 @@
       alert('✅ 文件已保存！请查看下载文件夹。');
     }
   </script>
+
 
 
 
